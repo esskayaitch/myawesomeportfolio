@@ -27,16 +27,17 @@ exports.createPages = ({ graphql, actions }) => {
     graphql(
       `
         {
-          allWordpressPage {
+          allWpPage {
             edges {
               node {
                 id
                 slug
                 status
-                template
+                template {
+                  templateName
+                }
                 title
                 content
-                template
               }
             }
           }
@@ -54,7 +55,7 @@ exports.createPages = ({ graphql, actions }) => {
         // We want to create a detailed page for each
         // page node. We'll just use the WordPress Slug for the slug.
         // The Page ID is prefixed with 'PAGE_'
-        _.each(result.data.allWordpressPage.edges, edge => {
+        _.each(result.data.allWpPage.edges, edge => {
           // Gatsby uses Redux to manage its internal state.       <<<<<<<<<<<<<<<<<<<<<<<<<<<
           // Plugins and sites can use functions like "createPage"
           // to interact with Gatsby.
@@ -77,7 +78,7 @@ exports.createPages = ({ graphql, actions }) => {
         graphql(
           `
             {
-              allWordpressPost {
+              allWpPost {
                 edges {
                   node {
                     id
@@ -99,7 +100,7 @@ exports.createPages = ({ graphql, actions }) => {
           // We want to create a detailed page for each
           // post node. We'll just use the WordPress Slug for the slug.
           // The Post ID is prefixed with 'POST_'
-          _.each(result.data.allWordpressPost.edges, edge => {
+          _.each(result.data.allWpPost.edges, edge => {
             createPage({
               path: `/post/${edge.node.slug}/`,
               component: slash(postTemplate),

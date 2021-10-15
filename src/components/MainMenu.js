@@ -1,16 +1,38 @@
 import React from "react"
 import { graphql, StaticQuery, Link } from "gatsby"
+import styled from "styled-components"
+import SiteInfo from "./SiteInfo"
+
+const MainmenuWrapper = styled.div`
+  display: flex;
+  background-color: rgb(3, 27, 77);
+  height: 100px;
+`
+
+const MenuItem = styled(Link)`
+  color: white;
+  display: block;
+  padding: 8px 16px;
+`
+
+const MainMenuInner = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  width: 960px;
+  height: 100%;
+`
 
 const MainMenu = () => (
   <StaticQuery
     query={graphql`
       {
-        allWordpressWpApiMenusMenusItems {
-          edges {
-            node {
-              items {
-                title
-                object_slug
+        allWpMenu(filter: { slug: { eq: "main-menu" } }) {
+          nodes {
+            menuItems {
+              nodes {
+                path
+                label
               }
             }
           }
@@ -18,16 +40,18 @@ const MainMenu = () => (
       }
     `}
     render={props => (
-      <div>
-        {props.allWordpressWpApiMenusMenusItems.edges[0].node.items.map(
-          item => (
-            <Link to={`/${item.object_slug}`} key={item.title}>
-              {item.title}
-            </Link>
-          )
-        )}
-      </div>
+      <MainmenuWrapper>
+        <MainMenuInner>
+          <SiteInfo />
+          {props.allWpMenu.nodes[0].menuItems.nodes.map(item => (
+            <MenuItem to={item.path} key={item.label}>
+              {item.label}
+            </MenuItem>
+          ))}
+        </MainMenuInner>
+      </MainmenuWrapper>
     )}
   />
 )
+
 export default MainMenu
