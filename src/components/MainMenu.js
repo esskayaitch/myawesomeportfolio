@@ -6,13 +6,7 @@ import SiteInfo from "./SiteInfo"
 const MainmenuWrapper = styled.div`
   display: flex;
   background-color: rgb(3, 27, 77);
-  height: 100px;
-`
-
-const MenuItem = styled(Link)`
-  color: white;
-  display: block;
-  padding: 8px 16px;
+  height: 80px;
 `
 
 const MainMenuInner = styled.div`
@@ -21,6 +15,12 @@ const MainMenuInner = styled.div`
   display: flex;
   width: 960px;
   height: 100%;
+`
+
+const MenuItem = styled(Link)`
+  color: white;
+  display: block;
+  padding: 30px 16px;
 `
 
 const MainMenu = () => (
