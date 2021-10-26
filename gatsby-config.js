@@ -1,8 +1,13 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby WordPress Starter`,
     description: `Kick off your next, great Gatsby project with this WordPress starter.`,
     author: `@tomphill`,
+    // pathPrefix: `/myawesomeportfolio`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -31,28 +36,13 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: `http://gatsby-wordpress-course.local/graphql`,
-        // minimizeDeprecationNotice: true,
-        // baseUrl: "gatsby-wordpress-course.local",
-        // protocol: "http",
-        // hostingWPCOM: false,
-        // useACF: false,
+        url:
+          process.env.WPGRAPHQL_URL || `http://gatsby-wordpress-course/graphql`, // for XAMPP
+        // `https://http://gatsby-wordpress-course.local/graphql`, // for Local/Flywheel
         schema: {
           perPage: 100,
         },
         verbose: false,
-        //
-        // concurrentRequests: 10,
-        // includedRoutes: [
-        //   "**/categories",
-        //   "**/posts",
-        //   "**/pages",
-        //   "**/media",
-        //   "**/tags",
-        //   "**/taxonomies",
-        //   "**/users",
-        //   "**/menus",
-        // ],
       },
     },
   ],
