@@ -1,6 +1,6 @@
 27 October 2021
 
-##This is the outcome of completing the Udemy course:
+## This is the outcome of completing the Udemy course:
 
 > "Gatsby JS: Build Gatsby static sites with React & WordPress"
 >
